@@ -15,23 +15,30 @@ download.file(destURL,"./repdata-data-activity.zip")
 unzip("./repdata-data-activity.zip")
 initData <- read.csv("./activity.csv")
 initData <- subset(initData, select = c("date","interval","steps"))
-
+```
 ## What is mean total number of steps taken per day?
+```{r}
 totalStepsPerDay <- aggregate(initData$steps,by=list(date=initData$date),FUN=sum,na.rm=FALSE)
+```
 #totalStepsPerDay
+```{r}
 hist(totalStepsPerDay$x,breaks=20)
 mean(totalStepsPerDay$x,na.rm=TRUE)
 median(totalStepsPerDay$x,na.rm=TRUE)
-
+```
 ## What is the average daily activity pattern?
+```{r}
 avgDaily <- aggregate(initData$steps,by=list(intrv=initData$interval),FUN=mean,na.rm=TRUE)
 names(avgDaily) <- c("interval","avg")
+```
 #avgDaily
+```{r}
 with(avgDaily,plot(interval,avg, type = "l"))
 avgDaily[avgDaily$avg == max(avgDaily$avg),]$interval
-
+```
 
 ## Imputing missing values
+```{r}
 sum(is.na(initData$steps))
 missIn <- merge(initData,avgDaily,by="interval")
 missIn$CopyOfSteps <- missIn$steps
@@ -42,10 +49,12 @@ newTotal <- aggregate(missIn$steps,by=list(date=missIn$date),FUN=sum,na.rm=TRUE)
 hist(newTotal$x,breaks=20)
 mean(newTotal$x)
 median(newTotal$x)
-
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r}
 missIn <- cbind(missIn,factor(weekdays(as.Date(missIn$date)), levels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"), labels = c("weekday","weekday","weekday","weekday","weekday","weekend","weekend")))
 names(missIn)[4] <- "weekend"
 avgByWeekday <- aggregate(missIn$steps,by=list(interval=missIn$interval,weekday=factor(missIn$weekend)),FUN=mean,na.rm=TRUE)
 xyplot(x ~ interval | weekday,avgByWeekday,type = "l", layout=c(1,2) )
+```
