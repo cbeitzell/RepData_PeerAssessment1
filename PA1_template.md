@@ -217,7 +217,7 @@ Mean: 10766.19
 
 Median: 10766.19
 
-The Mean is the same as the previous dataset, this is due to the fact I used the averages of the intervals, which means the totals for that day is the same as the average, therefore the overall average won't change.
+The Mean is the same as the previous data set, this is due to the fact I used the averages of the intervals, which means the totals for that day is the same as the average, therefore the overall average won't change.
 
 The Median changed, as there was higher data to raise the median.
 
