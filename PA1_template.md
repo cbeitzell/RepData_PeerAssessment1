@@ -247,7 +247,9 @@ missIn <- cbind(missIn,factor(weekdays(as.Date(missIn$date)),
 names(missIn)[4] <- "weekend"
 
 # Figure out the average on the intervals by weekday and weekend
-avgByWeekday <- aggregate(missIn$steps,by=list(interval=missIn$interval,                        weekday=factor(missIn$weekend)),FUN=mean,na.rm=TRUE)
+avgByWeekday <- aggregate(missIn$steps,
+        by=list(interval=missIn$interval,weekday=factor(missIn$weekend)),
+        FUN=mean,na.rm=TRUE)
 ```
 
 ```

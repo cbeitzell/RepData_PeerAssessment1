@@ -405,7 +405,9 @@ missIn &lt;- cbind(missIn,factor(weekdays(as.Date(missIn$date)),
 <pre><code class="r">names(missIn)[4] &lt;- &quot;weekend&quot;
 
 # Figure out the average on the intervals by weekday and weekend
-avgByWeekday &lt;- aggregate(missIn$steps,by=list(interval=missIn$interval,                        weekday=factor(missIn$weekend)),FUN=mean,na.rm=TRUE)
+avgByWeekday &lt;- aggregate(missIn$steps,
+        by=list(interval=missIn$interval,weekday=factor(missIn$weekend)),
+        FUN=mean,na.rm=TRUE)
 </code></pre>
 
 <pre><code>## Warning in `levels&lt;-`(`*tmp*`, value = if (nl == nL) as.character(labels)
